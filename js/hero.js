@@ -58,8 +58,14 @@ class Hero {
             } else {
                 this.arrows.shift();
             }
-            console.log(this.arrows.length);
         }
 
     }
+
+    runLogic() {
+
+
+
+    }
+
 }

@@ -8,32 +8,29 @@ class Game {
         this.goblin = new Enemy(this);
         this.goblin.createHord();
         this.draw();
-
         this.loop();
+    }
 
+    runLogic() {
+        this.goblin.runLogic();
     }
 
 
     loop() {
+        this.runLogic();
         this.player.shoot();
         this.draw();
-        this.player.drawArrow();
 
         setTimeout(() => {
             this.loop();
         }, 200 / 30);
     }
 
-    /* arrowLoop() {
-         this.draw();
-         setTimeout(() => {
-             this.arrowLoop();
-         }, 200 / 30);
-     }*/
-
     draw() {
         this.clear();
         this.player.draw();
+        this.player.drawArrow();
+        this.goblin.drawEnemy();
     }
 
     clear() {
