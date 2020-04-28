@@ -1,15 +1,19 @@
 class Hero {
     constructor(game) {
         this.game = game;
-        this.lives = 3;
+        this.lives = 5;
         this.x = 220;
         this.y = 450;
         this.position = 'up';
         this.shootArrow = false;
         this.arrows = [];
+        this.points = 0;
     }
 
     shoot() {
+
+        //SAVE POSIITON OF SHOOTED ARROWS
+
         if (this.shootArrow) {
             this.shootArrow = false;
             this.arrows.push({ x: this.x, y: this.y, collision: false });
@@ -19,25 +23,24 @@ class Hero {
     move() {
         switch (this.position) {
             case 'right':
-                this.x = this.x + 20;
-                //console.log('x:' + this.x);
+                this.x = this.x + 25;
                 break;
             case 'left':
-                this.x = this.x - 20;
-                // console.log('x:' + this.x);
+                this.x = this.x - 25;
                 break;
             case 'down':
-                this.y = this.y + 20;
-                // console.log('y:' + this.y);
+                this.y = this.y + 25;
                 break;
             case 'up':
-                this.y = this.y - 20;
-                //console.log('y:' + this.y);
+                this.y = this.y - 25;
                 break;
         }
     }
 
     draw() {
+
+        //DRAW PLAYER
+
         const context = this.game.context;
         context.save();
         context.fillStyle = 'red'; //player
@@ -46,8 +49,11 @@ class Hero {
     }
 
     drawArrow() {
+
+        //PHYSICS AND DRAW ARROW
+
         for (let index = 0; index < this.arrows.length; index++) {
-            if (this.arrows[index].y > 0) {
+            if (this.arrows[index].y > 0 && this.arrows[index].collision === false) {
                 this.arrows[index].y = this.arrows[index].y - 5;
                 //DRAW ARROW
                 const context = this.game.context;
@@ -59,12 +65,6 @@ class Hero {
                 this.arrows.shift();
             }
         }
-
-    }
-
-    runLogic() {
-
-
 
     }
 
