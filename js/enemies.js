@@ -6,14 +6,14 @@ class Enemy {
     }
 
     createHord() {
-        //CREATES A NEW HORD IN START OF GAME OR WHEN IS A NEW WAVE
+        //CREATES A NEW HORD IN START OF GAME OR WHEN IS A NEW WAVE AND CHANGE THE SPEED OF WAVES LARGER THAN 2
         this.wave++;
         this.horde = [];
         for (let i = 0; i < 10; i++) {
             let randomX = Math.floor(Math.random() * 400 + 50);
             let randomSpeed = 0;
             if (this.wave > 2) {
-                randomSpeed = Math.floor(Math.random() * 300 + 400);
+                randomSpeed = Math.floor(Math.random() * 400 + 400);
             } else {
                 randomSpeed = Math.floor(Math.random() * 300 + 300);
             }
@@ -33,13 +33,18 @@ class Enemy {
                 //DRAW ENEMY
                 const context = this.game.context;
                 context.save();
-                context.fillStyle = 'green';
-                context.fillRect(this.horde[index].x, this.horde[index].y, 20, 20);
+                //context.fillStyle = 'black';
+                //context.fillRect(this.horde[index].x, this.horde[index].y, 20, 20);
+
+                const enemyDraw = new Image();
+                enemyDraw.src = '/images/enemy.gif';
+                context.drawImage(enemyDraw, this.horde[index].x, this.horde[index].y, 25, 25);
+
                 context.restore();
 
             } else if (this.horde[index].y >= 450) {
                 this.horde.splice(index, 1);
-                player.lives--;
+                player.lifes--;
             }
         }
     }
@@ -52,25 +57,21 @@ class Enemy {
             if (player.y <= this.horde[i].y + 22 &&
                 this.horde[i].x >= player.x - 20 &&
                 this.horde[i].x <= player.x + 30 &&
-                player.lives > 0) {
-                player.lives--;
-                console.log(player.lives);
+                player.lifes > 0) {
+                player.lifes--;
                 this.horde.splice(i, 1);
-
-                //CHECK ARROW COLLISION
             }
+            //CHECK ARROW COLLISION
             for (let a = 0; a < player.arrows.length; a++) {
                 for (let i = 0; i < this.horde.length; i++)
 
                     if (player.arrows[a].y < this.horde[i].y + 22 &&
                     this.horde[i].x >= player.arrows[a].x - 5 &&
                     this.horde[i].x <= player.arrows[a].x + 20 &&
-                    player.lives > 0) {
+                    player.lifes > 0) {
                     this.horde.splice(i, 1);
                     player.arrows[a].collision = true;
                     player.points = player.points + 30;
-
-                    console.log(player.points);
                 }
             }
         }
