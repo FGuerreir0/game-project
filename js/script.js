@@ -2,25 +2,23 @@ const $canvas = document.querySelector('canvas');
 const game = new Game($canvas);
 
 const $buttonStart = document.getElementById('start');
-const $buttonReset = document.getElementById('reset');
 const $buttonPause = document.getElementById('pause');
 
-
 $buttonStart.addEventListener('click', () => {
-    game.start();
-});
-
-$buttonReset.addEventListener('click', () => {
-    game.reset();
+  game.startClicked = true;
+  if (game.startClicked) {
+    $buttonStart.innerText = 'Restart';
+  } else {
+    $buttonStart.innerText = 'Start';
+  }
+  game.start();
 });
 
 $buttonPause.addEventListener('click', () => {
-    if (game.running) {
-        $buttonPause.innerText = 'Resume';
-        game.pause();
-    } else {
-        $buttonPause.innerText = 'Pause';
-        game.pause();
-
-    }
+  if (game.running) {
+    $buttonPause.innerText = 'Resume';
+  } else {
+    $buttonPause.innerText = 'Pause';
+  }
+  game.pause();
 });

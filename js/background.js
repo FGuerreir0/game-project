@@ -1,14 +1,13 @@
+const background = new Image();
+background.src = './images/background.png';
+
 class Background {
-    constructor(game) {
-        this.game = game;
+  constructor(game) {
+    this.game = game;
+  }
 
-    }
-
-    draw() {
-        const context = this.game.context;
-        const background = new Image();
-        background.src = './images/background.png';
-        context.drawImage(background, 0, 0, 500, 500);
-    }
-
+  draw() {
+    const context = this.game.context;
+    context.drawImage(background, 0, 0, 500, 500);
+  }
 }
