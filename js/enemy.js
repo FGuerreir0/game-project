@@ -28,7 +28,7 @@ class Enemy {
       context.restore();
     } else {
       context.save();
-      context.drawImage(enemyDrawDark, this.x, this.y, 30, 30);
+      context.drawImage(enemyDrawDark, this.x, this.y, 32, 32);
       context.restore();
     }
   }

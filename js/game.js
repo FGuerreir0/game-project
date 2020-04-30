@@ -1,3 +1,5 @@
+const gameoversound = new Audio('/audio/gameover.mp3');
+
 class Game {
   constructor($canvas, audio) {
     this.$canvas = $canvas;
@@ -5,6 +7,7 @@ class Game {
     this.setKeyBindings();
     this.background = new Background(this);
     this.audio = audio;
+    this.gameoverPlayed = false;
   }
 
   setKeyBindings() {
@@ -60,6 +63,7 @@ class Game {
     this.extralife = new Extra(this);
     this.slowdown = new Slow(this);
     this.gameover = new Gameover(this);
+    this.gameoverPlayed = false;
 
     //CREATE A NEW HORD
     this.horde.createHord();
@@ -128,6 +132,10 @@ class Game {
       this.startButton();
       this.gameover.drawGameOver();
       this.audio.pause();
+      if (this.gameoverPlayed === false) {
+        gameoversound.play();
+        this.gameoverPlayed = true;
+      }
     }
   }
 
