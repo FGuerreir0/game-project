@@ -17,13 +17,15 @@ window.addEventListener('load', () => {
 const game = new Game($canvas, audio);
 const $buttonStart = document.getElementById('start');
 const $buttonPause = document.getElementById('pause');
+const $buttonMute = document.getElementById('mute');
 
+//START BUTTON
 $buttonStart.addEventListener('click', () => {
   game.startClicked = true;
   if (game.startClicked) {
     $buttonStart.innerText = 'Restart';
 
-    // START PLAY AUDIO
+    // START GAME PLAY AUDIO
     audio.play();
   } else {
     $buttonStart.innerText = 'Start';
@@ -31,6 +33,7 @@ $buttonStart.addEventListener('click', () => {
   game.start();
 });
 
+// PAUSE GAME BUTTON
 $buttonPause.addEventListener('click', () => {
   if (game.running) {
     $buttonPause.innerText = 'Resume';
@@ -41,4 +44,16 @@ $buttonPause.addEventListener('click', () => {
   }
 
   game.pause();
+});
+
+//MUTE AUDIO BUTTON
+$buttonMute.addEventListener('click', () => {
+  if (audio.paused === false) {
+    $buttonMute.innerText = 'Unmute';
+    // START PLAY AUDIO
+    audio.pause();
+  } else {
+    $buttonMute.innerText = 'Mute';
+    audio.play();
+  }
 });

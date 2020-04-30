@@ -12,8 +12,6 @@ class Enemy {
 
     let randomX = Math.floor(Math.random() * 450);
     let randomSpeed = 0;
-    console.log(this.speedIncrement);
-    console.log(this.wave);
     randomSpeed = Math.floor(Math.random() * 300 + this.speedIncrement);
 
     this.x = randomX;

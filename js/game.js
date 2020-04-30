@@ -58,6 +58,7 @@ class Game {
     this.player = new Hero(this);
     this.horde = new Horde(this);
     this.extralife = new Extra(this);
+    this.slowdown = new Slow(this);
     this.gameover = new Gameover(this);
 
     //CREATE A NEW HORD
@@ -87,12 +88,15 @@ class Game {
     this.player.runArrowLogic();
     this.horde.runLogic();
     this.extralife.collisionOffer();
+    this.slowdown.collisionPower();
+
     this.player.shoot();
     this.player.checkHeroLife();
 
     //CREATE A NEW WAVE IF THE PLAYER HAS LIVES AND THE ARRAY OF HORDE IS EMPTY
     if (this.horde.enemies.length === 0 && this.player.lifes > 0) {
       this.extralife.runLogic();
+      this.slowdown.runLogic();
       this.horde.createHord();
     }
   }
@@ -115,6 +119,7 @@ class Game {
     this.background.draw();
     this.player.draw();
     this.horde.draw();
+    this.slowdown.draw();
     this.extralife.draw();
     this.player.drawArrow();
 

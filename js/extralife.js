@@ -17,7 +17,6 @@ class Extra {
       let randomY = Math.floor(Math.random() * (400 - 250) + 250);
       let randomX = Math.floor(Math.random() * 200);
       this.offer.push({ x: randomX, y: randomY });
-      console.log(this.offer);
     } else {
       this.offer = [];
     }
