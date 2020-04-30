@@ -1,9 +1,10 @@
 class Game {
-  constructor($canvas) {
+  constructor($canvas, audio) {
     this.$canvas = $canvas;
     this.context = $canvas.getContext('2d');
     this.setKeyBindings();
     this.background = new Background(this);
+    this.audio = audio;
   }
 
   setKeyBindings() {
@@ -121,6 +122,7 @@ class Game {
       this.startClicked = false;
       this.startButton();
       this.gameover.drawGameOver();
+      this.audio.pause();
     }
   }
 
@@ -135,7 +137,7 @@ class Game {
 
   lifes() {
     const $lifes = document.getElementById('lifes');
-    $lifes.innerHTML = `<p id='lifes'>Lifes: 
+    $lifes.innerHTML = `<p id='lifes'>Lives: 
         ${this.player.lifes}
          <img src="/images/1.png" alt="heart" width=20px height=20px></p>`;
   }
