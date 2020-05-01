@@ -8,6 +8,7 @@ class Game {
     this.background = new Background(this);
     this.audio = audio;
     this.gameoverPlayed = false;
+    this.ultimateUsed = false;
   }
 
   setKeyBindings() {
@@ -46,6 +47,15 @@ class Game {
           event.preventDefault();
           this.player.direction = 'up';
           this.player.shootArrow = true;
+          break;
+
+        case 88: //Ultimate Power
+          event.preventDefault();
+          if (!this.ultimateUsed) {
+            this.horde.enemies = [];
+            this.ultimateUsed = true;
+          }
+          break;
       }
     });
   }
@@ -56,9 +66,10 @@ class Game {
       delete this.timeout;
     }
     this.running = true;
-
+    this.ultimateUsed = false;
     //CREATE ALL CLASSES
     this.player = new Hero(this);
+    this.ultimatepower = new Ultimate(this);
     this.horde = new Horde(this);
     this.extralife = new Extra(this);
     this.slowdown = new Slow(this);
@@ -121,6 +132,7 @@ class Game {
   draw() {
     this.clear();
     this.background.draw();
+    this.ultimatepower.draw();
     this.player.draw();
     this.horde.draw();
     this.slowdown.draw();
