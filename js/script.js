@@ -16,19 +16,38 @@ window.addEventListener('load', () => {
 
 const game = new Game($canvas, audio);
 const $buttonStart = document.getElementById('start');
+const $buttonSurvive = document.getElementById('survive');
 const $buttonPause = document.getElementById('pause');
 const $buttonMute = document.getElementById('mute');
 
 //START BUTTON
 $buttonStart.addEventListener('click', () => {
   game.startClicked = true;
+  game.surviveClicked = false;
   if (game.startClicked) {
     $buttonStart.innerText = 'Restart';
-
+    $buttonSurvive.innerText = 'Survive';
     // START GAME PLAY AUDIO
     audio.play();
   } else {
-    $buttonStart.innerText = 'Start';
+    $buttonStart.innerText = 'Campaign';
+    $buttonSurvive.innerText = 'Survive';
+  }
+  game.start();
+});
+
+//Survive BUTTON
+$buttonSurvive.addEventListener('click', () => {
+  game.startClicked = true;
+  game.surviveClicked = true;
+  if (game.startClicked) {
+    $buttonSurvive.innerText = 'Restart';
+    $buttonStart.innerText = 'Campaign';
+    // START GAME PLAY AUDIO
+    audio.play();
+  } else {
+    $buttonStart.innerText = 'Campaign';
+    $buttonSurvive.innerText = 'Survive';
   }
   game.start();
 });

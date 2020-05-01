@@ -1,5 +1,6 @@
 const gameoversound = new Audio('/audio/gameover.mp3');
 const ultimateSound = new Audio('/audio/ultimate.mp3');
+const winSound = new Audio('/audio/win.mp3');
 
 class Game {
   constructor($canvas, audio) {
@@ -9,7 +10,9 @@ class Game {
     this.background = new Background(this);
     this.audio = audio;
     this.gameoverPlayed = false;
+    this.winPlayed = false;
     this.ultimateUsed = false;
+    this.surviveClicked = false;
   }
 
   setKeyBindings() {
@@ -50,7 +53,7 @@ class Game {
           this.player.shootArrow = true;
           break;
 
-        case 88: //Ultimate Power
+        case 88: //ULTIMATE POWER & SOUND
           event.preventDefault();
           if (!this.ultimateUsed) {
             ultimateSound.play();
@@ -77,7 +80,9 @@ class Game {
     this.extralife = new Extra(this);
     this.slowdown = new Slow(this);
     this.gameover = new Gameover(this);
+    this.winning = new Win(this);
     this.gameoverPlayed = false;
+    this.winPlayed = false;
 
     //CREATE A NEW HORD
     this.horde.createHord();
@@ -142,6 +147,7 @@ class Game {
     this.extralife.draw();
     this.player.drawArrow();
 
+    // GAMEOVER GAME
     if (this.player.lifes < 1) {
       this.startClicked = false;
       this.startButton();
@@ -150,6 +156,18 @@ class Game {
       if (this.gameoverPlayed === false) {
         gameoversound.play();
         this.gameoverPlayed = true;
+      }
+    }
+    //WINNING GAME
+    else if (this.horde.wave > 2 && !this.surviveClicked) {
+      this.startClicked = false;
+      this.startButton();
+      this.winning.draw();
+      this.audio.pause();
+      this.running = false;
+      if (this.winPlayed === false) {
+        winSound.play();
+        this.winPlayed = true;
       }
     }
   }
