@@ -1,4 +1,5 @@
 const gameoversound = new Audio('/audio/gameover.mp3');
+const ultimateSound = new Audio('/audio/ultimate.mp3');
 
 class Game {
   constructor($canvas, audio) {
@@ -52,6 +53,7 @@ class Game {
         case 88: //Ultimate Power
           event.preventDefault();
           if (!this.ultimateUsed) {
+            ultimateSound.play();
             this.horde.enemies = [];
             this.player.points += 500;
             this.ultimateUsed = true;
