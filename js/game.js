@@ -53,6 +53,7 @@ class Game {
           event.preventDefault();
           if (!this.ultimateUsed) {
             this.horde.enemies = [];
+            this.player.points += 500;
             this.ultimateUsed = true;
           }
           break;
